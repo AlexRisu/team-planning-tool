@@ -2,6 +2,7 @@ package de.ssd.models;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -12,7 +13,8 @@ import java.util.Set;
 public class Event {
     private final String title;
 
-    private final String description;
+    @Setter
+    private String description = "";
 
     private final Set<EventTag> eventTagList = new HashSet<>();
 

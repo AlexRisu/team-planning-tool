@@ -25,9 +25,9 @@ public class ImportEventApiTest {
     }
 
     @Test
-    void whenImportEventGetsCalled_thenImportEventShouldBeCalled(){
+    void testEventImport(){
 
-        importEventApi.importEvent(new Event("", ""));
+        importEventApi.importEvent(new Event("test"));
 
         verify(importEventServiceMock).importEvent(Mockito.any());
     }

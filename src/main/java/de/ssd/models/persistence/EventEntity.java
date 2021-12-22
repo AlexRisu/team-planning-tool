@@ -16,7 +16,7 @@ import java.util.Set;
 public class EventEntity {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
 
     @NonNull

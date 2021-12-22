@@ -13,6 +13,6 @@ public class ImportEventApi {
     }
 
     public void importEvent(@RequestParam Event event){
-
+        importEventService.importEvent(event);
     }
 }
