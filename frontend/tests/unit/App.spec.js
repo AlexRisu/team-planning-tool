@@ -5,4 +5,8 @@ describe('App', () => {
     it('has data', () => {
         expect(typeof App.data).toBe('function')
     })
+
+    it('should ', function () {
+        expect(1 + 1).toBe(2);
+    });
 })

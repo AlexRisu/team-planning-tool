@@ -1,7 +1,6 @@
 <template>
   <v-app id="app">
     <h1>tst</h1>
-
   </v-app>
 </template>
 

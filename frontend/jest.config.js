@@ -36,7 +36,8 @@ module.exports = {
     ],
 
     collectCoverage: true,
-    collectCoverageFrom: ["**/*.{js,vue}", "!**/node_modules/**", "!**/coverage/**", "!**/main.js", "!**/jest.config.js"],
+    collectCoverageFrom: ["**/*.{js,vue}", "!**/node_modules/**", "!**/coverage/**", "!**/main.js",
+        "!**/jest.config.js", "!**/plugins/**", "!**/babel.config.js", "!**/webpack.config.js", "!**/common/*"],
     coverageReporters: ["html", "text-summary"],
     preset: '@vue/cli-plugin-unit-jest'
 };
