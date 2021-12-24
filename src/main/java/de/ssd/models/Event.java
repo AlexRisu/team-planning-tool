@@ -1,16 +1,15 @@
 package de.ssd.models;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
 @RequiredArgsConstructor
+@AllArgsConstructor
 @Getter
+@Builder
 @EqualsAndHashCode
 public class Event {
 

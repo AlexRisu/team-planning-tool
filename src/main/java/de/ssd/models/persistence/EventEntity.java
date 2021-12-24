@@ -7,9 +7,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@AllArgsConstructor
 @RequiredArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 @IdClass(EventId.class)
 public class EventEntity {
 
@@ -18,7 +19,6 @@ public class EventEntity {
     private long id;
 
     @Id
-    @Setter
     private String context;
 
     @NonNull

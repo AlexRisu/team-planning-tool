@@ -25,4 +25,12 @@ public class EventMapper {
         eventTagEntity.setColor(eventTag.getColor());
         return eventTagEntity;
     }
+
+    public Event toDomain(EventEntity eventEntity) {
+        return Event.builder()
+                .context(eventEntity.getContext())
+                .title(eventEntity.getTitle())
+                .description(eventEntity.getDescription())
+                .build();
+    }
 }
