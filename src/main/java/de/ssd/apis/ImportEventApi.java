@@ -2,8 +2,10 @@ package de.ssd.apis;
 
 import de.ssd.models.Event;
 import de.ssd.services.ImportEventService;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+@RestController
 public class ImportEventApi {
 
     private final ImportEventService importEventService;
@@ -12,7 +14,8 @@ public class ImportEventApi {
         this.importEventService = importEventService;
     }
 
-    public void importEvent(@RequestParam Event event){
+    @PostMapping("/event/import")
+    public void importEvent(Event event) {
         importEventService.importEvent(event);
     }
 }

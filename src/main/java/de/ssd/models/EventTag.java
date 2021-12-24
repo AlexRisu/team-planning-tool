@@ -6,9 +6,9 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public class EventTag {
-    private String name;
+    private final String name;
 
-    private String description;
+    private final String description;
 
-    private String color;
+    private final String color;
 }

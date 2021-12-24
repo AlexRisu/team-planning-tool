@@ -6,12 +6,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import static org.mockito.Mockito.verify;
 
-public class ImportEventApiTest {
+class ImportEventApiTest {
 
     @Mock
     ImportEventService importEventServiceMock;
@@ -25,10 +24,11 @@ public class ImportEventApiTest {
     }
 
     @Test
-    void testEventImport(){
+    void testEventImport() {
+        final Event event = new Event("test");
 
-        importEventApi.importEvent(new Event("test"));
+        importEventApi.importEvent(event);
 
-        verify(importEventServiceMock).importEvent(Mockito.any());
+        verify(importEventServiceMock).importEvent(event);
     }
 }

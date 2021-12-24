@@ -1,5 +1,6 @@
 package de.ssd.models;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -10,12 +11,14 @@ import java.util.Set;
 
 @RequiredArgsConstructor
 @Getter
+@EqualsAndHashCode
 public class Event {
     private final String title;
 
     @Setter
     private String description = "";
 
+    @EqualsAndHashCode.Exclude
     private final Set<EventTag> eventTagList = new HashSet<>();
 
     public void add(EventTag eventTag){
