@@ -33,7 +33,7 @@ class ImportEventServiceTest {
 
     @Test
     void testEventImport() {
-        Event event = new Event("Test");
+        Event event = new Event("TestContext", "Test");
         event.setDescription("Event for testing purposes.");
         final EventEntity expected = eventMapper.toEntity(event);
 
@@ -44,9 +44,9 @@ class ImportEventServiceTest {
 
     @Test
     void testAnotherEventImport() {
-        Event event = new Event("Test");
+        Event event = new Event("TestContext", "Test");
         event.setDescription("A tag for testing purposes again.");
-        final EventTag eventTag = new EventTag("test-tag", "A tag for testing purposes.", "blue");
+        final EventTag eventTag = new EventTag("test-tag", "app", "A tag for testing purposes.", "blue");
         event.add(eventTag);
         final EventEntity expected = eventMapper.toEntity(event);
 
@@ -57,11 +57,20 @@ class ImportEventServiceTest {
 
     @Test
     void testInvalidTestTag() {
-        Event event = new Event("Test");
+        Event event = new Event("TestContext", "Test");
         event.setDescription("A tag for testing purposes again.");
-        final EventTag eventTag = new EventTag("", "", "");
+        final EventTag eventTag = new EventTag("", "app", "", "");
         event.add(eventTag);
-        final EventEntity expected = eventMapper.toEntity(event);
+
+        assertThatExceptionOfType(InvalidEventTagException.class).isThrownBy(() -> importEventService.importEvent(event));
+    }
+
+    @Test
+    void testAnotherInvalidTestTag() {
+        Event event = new Event("TestContext", "Test");
+        event.setDescription("A tag for testing purposes again.");
+        final EventTag eventTag = new EventTag("test", null, "", "");
+        event.add(eventTag);
 
         assertThatExceptionOfType(InvalidEventTagException.class).isThrownBy(() -> importEventService.importEvent(event));
     }
@@ -69,14 +78,28 @@ class ImportEventServiceTest {
     @Test
     void testInvalidEventImport() {
 
-        assertThatThrownBy(() -> importEventService.importEvent(new Event("")))
+        assertThatThrownBy(() -> importEventService.importEvent(new Event("app", "")))
+                .isInstanceOf(InvalidEventException.class);
+    }
+
+    @Test
+    void testInvalidContextEventImport() {
+
+        assertThatThrownBy(() -> importEventService.importEvent(new Event("", "test")))
                 .isInstanceOf(InvalidEventException.class);
     }
 
     @Test
     void testAnotherInvalidEventImport() {
 
-        assertThatThrownBy(() -> importEventService.importEvent(new Event(null)))
+        assertThatThrownBy(() -> importEventService.importEvent(new Event("app", null)))
+                .isInstanceOf(InvalidEventException.class);
+    }
+
+    @Test
+    void testAnotherInvalidContextEventImport() {
+
+        assertThatThrownBy(() -> importEventService.importEvent(new Event(null, "test")))
                 .isInstanceOf(InvalidEventException.class);
     }
 }

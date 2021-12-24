@@ -25,7 +25,7 @@ class ImportEventApiTest {
 
     @Test
     void testEventImport() {
-        final Event event = new Event("test");
+        final Event event = new Event("", "test");
 
         importEventApi.importEvent(event);
 

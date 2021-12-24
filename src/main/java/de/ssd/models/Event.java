@@ -13,6 +13,9 @@ import java.util.Set;
 @Getter
 @EqualsAndHashCode
 public class Event {
+
+    private final String context;
+
     private final String title;
 
     @Setter
@@ -21,11 +24,11 @@ public class Event {
     @EqualsAndHashCode.Exclude
     private final Set<EventTag> eventTagList = new HashSet<>();
 
-    public void add(EventTag eventTag){
+    public void add(EventTag eventTag) {
         this.eventTagList.add(eventTag);
     }
 
-    public void addAll(Collection<EventTag> eventTags){
+    public void addAll(Collection<EventTag> eventTags) {
         this.eventTagList.addAll(eventTags);
     }
 }

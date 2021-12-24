@@ -11,14 +11,16 @@ import java.util.stream.Collectors;
 @Service
 public class EventMapper {
     public EventEntity toEntity(Event event) {
-        EventEntity eventDTO = new EventEntity(event.getTitle(), event.getDescription());
-        eventDTO.addAll(event.getEventTagList().stream().map(this::toEntity).collect(Collectors.toSet()));
-        return eventDTO;
+        EventEntity eventEntity = new EventEntity(event.getTitle(), event.getDescription());
+        eventEntity.addAll(event.getEventTagList().stream().map(this::toEntity).collect(Collectors.toSet()));
+        eventEntity.setContext(event.getContext());
+        return eventEntity;
     }
 
     private EventTagEntity toEntity(EventTag eventTag) {
         final EventTagEntity eventTagEntity = new EventTagEntity();
         eventTagEntity.setName(eventTag.getName());
+        eventTagEntity.setContext(eventTag.getContext());
         eventTagEntity.setDescription(eventTag.getDescription());
         eventTagEntity.setColor(eventTag.getColor());
         return eventTagEntity;

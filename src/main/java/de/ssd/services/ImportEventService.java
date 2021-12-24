@@ -23,7 +23,9 @@ public class ImportEventService {
     }
 
     private void validateEvent(Event event) {
-        if (event.getTitle() == null || event.getTitle().isBlank()) {
+        final boolean eventTitleIsInvalid = event.getTitle() == null || event.getTitle().isBlank();
+        final boolean eventContextIsInvalid = event.getContext() == null || event.getContext().isBlank();
+        if (eventTitleIsInvalid || eventContextIsInvalid) {
             throw new InvalidEventException();
         }
         validateEventTags(event.getEventTagList());
@@ -33,9 +35,10 @@ public class ImportEventService {
         final boolean hasInvalidEntries = eventTagList
                 .stream()
                 .dropWhile(eventTag
-                        -> eventTag.getName().isBlank()
-                        || eventTag.getDescription().isBlank()
-                        || eventTag.getColor().isBlank())
+                        -> eventTag.getName() == null
+                        || eventTag.getName().isBlank()
+                        || eventTag.getContext() == null
+                        || eventTag.getContext().isBlank())
                 .count() != eventTagList.size();
         if (hasInvalidEntries) {
             throw new InvalidEventTagException();

@@ -1,9 +1,6 @@
 package de.ssd.models.persistence;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -13,11 +10,16 @@ import java.util.Set;
 @AllArgsConstructor
 @RequiredArgsConstructor
 @NoArgsConstructor
+@IdClass(EventId.class)
 public class EventEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    private long id;
+
+    @Id
+    @Setter
+    private String context;
 
     @NonNull
     @Column
