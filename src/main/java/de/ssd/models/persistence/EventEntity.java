@@ -29,6 +29,9 @@ public class EventEntity {
     @Column
     private String description;
 
+    @Column
+    private float duration;
+
     @OneToMany(cascade = CascadeType.ALL)
     private final Set<EventTagEntity> eventTagList = new HashSet<>();
 
@@ -39,4 +42,5 @@ public class EventEntity {
     public void addAll(Set<EventTagEntity> eventTagEntities) {
         this.eventTagList.addAll(eventTagEntities);
     }
+
 }

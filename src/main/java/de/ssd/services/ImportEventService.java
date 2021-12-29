@@ -34,14 +34,17 @@ public class ImportEventService {
     private void validateEventTags(Set<EventTag> eventTagList) {
         final boolean hasInvalidEntries = eventTagList
                 .stream()
-                .dropWhile(eventTag
-                        -> eventTag.getName() == null
-                        || eventTag.getName().isBlank()
-                        || eventTag.getContext() == null
-                        || eventTag.getContext().isBlank())
+                .dropWhile(this::isInvalidEventTag)
                 .count() != eventTagList.size();
         if (hasInvalidEntries) {
             throw new InvalidEventTagException();
         }
+    }
+
+    private boolean isInvalidEventTag(EventTag eventTag) {
+        return eventTag.getName() == null
+                || eventTag.getName().isBlank()
+                || eventTag.getContext() == null
+                || eventTag.getContext().isBlank();
     }
 }

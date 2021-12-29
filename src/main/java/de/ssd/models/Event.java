@@ -20,6 +20,8 @@ public class Event {
     @Setter
     private String description = "";
 
+    private float duration;
+
     @EqualsAndHashCode.Exclude
     private final Set<EventTag> eventTagList = new HashSet<>();
 

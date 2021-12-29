@@ -38,4 +38,16 @@ class EventServiceTest {
 
         assertThat(actual).asList().hasSize(1).contains(eventMapper.toDomain(eventEntity));
     }
+
+    @Test
+    void testEventWithDuration() {
+        final EventEntity expected = new EventEntity();
+        expected.setContext("testContext");
+        expected.setDuration(2f);
+        when(eventRepository.findAllByContext("testContext")).thenReturn(List.of(expected));
+
+        final Collection<Event> actual = eventService.getEventsByContext("testContext");
+
+        assertThat(actual).asList().hasSize(1).contains(eventMapper.toDomain(expected));
+    }
 }

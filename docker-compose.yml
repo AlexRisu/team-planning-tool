@@ -1,0 +1,11 @@
+services:
+  backend:
+    build:
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+  frontend:
+    build:
+      dockerfile: frontend.Dockerfile
+    ports:
+      - "6002:80"

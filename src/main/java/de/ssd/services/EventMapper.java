@@ -31,6 +31,7 @@ public class EventMapper {
                 .context(eventEntity.getContext())
                 .title(eventEntity.getTitle())
                 .description(eventEntity.getDescription())
+                .duration(eventEntity.getDuration())
                 .build();
     }
 }

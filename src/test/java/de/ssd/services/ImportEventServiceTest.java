@@ -8,10 +8,15 @@ import de.ssd.models.persistence.EventEntity;
 import de.ssd.models.persistence.repositories.EventRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
+
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.AssertionsForClassTypes.*;
 
@@ -55,24 +60,24 @@ class ImportEventServiceTest {
         assertThat(event).usingRecursiveComparison().isEqualTo(expected);
     }
 
-    @Test
-    void testInvalidTestTag() {
+    @ParameterizedTest
+    @MethodSource
+    void testAnotherInvalidTestTag(final EventTag eventTag) {
         Event event = new Event("TestContext", "Test");
         event.setDescription("A tag for testing purposes again.");
-        final EventTag eventTag = new EventTag("", "app", "", "");
         event.add(eventTag);
 
         assertThatExceptionOfType(InvalidEventTagException.class).isThrownBy(() -> importEventService.importEvent(event));
     }
 
-    @Test
-    void testAnotherInvalidTestTag() {
-        Event event = new Event("TestContext", "Test");
-        event.setDescription("A tag for testing purposes again.");
-        final EventTag eventTag = new EventTag("test", null, "", "");
-        event.add(eventTag);
-
-        assertThatExceptionOfType(InvalidEventTagException.class).isThrownBy(() -> importEventService.importEvent(event));
+    private static Stream<Arguments> testAnotherInvalidTestTag() {
+        return Stream.of(
+                Arguments.of(new EventTag("test", null, "", "")),
+                Arguments.of(new EventTag(null, "app", "", "")),
+                Arguments.of(new EventTag("", "app", "", "")),
+                Arguments.of(new EventTag(null, null, "", "")),
+                Arguments.of(new EventTag("test", "", "", ""))
+        );
     }
 
     @Test
