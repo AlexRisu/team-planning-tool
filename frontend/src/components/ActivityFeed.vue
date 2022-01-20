@@ -31,7 +31,7 @@
             </v-btn>
           </v-card-text>
           <span class="activity-time">
-            {{ item.activity.date }}
+            {{ item.activity.date.getHours() }} Hours ago
           </span>
         </v-card>
       </v-timeline-item>
@@ -42,6 +42,9 @@
 <script>
 export default {
   name: "ActivityFeed",
+  props: {
+    data: {type: Array, required: false,}
+  },
   data() {
     return {
       activityFeedPlaceholder: [
@@ -66,6 +69,11 @@ export default {
           icon: 'mdi-book-variant',
         },
       ],
+    }
+  },
+  created() {
+    if (this.data) {
+      this.activityFeedPlaceholder = this.data;
     }
   }
 }

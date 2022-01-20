@@ -1,17 +1,25 @@
 <template>
   <div class="nav-container">
-    <router-link to="Home">Home</router-link>
+    <router-link to="/">Home</router-link>
+    <router-link to="Calendar">Calendar</router-link>
     <router-link to="About">About</router-link>
-
-    <router-link to="Profile" class="profile">
-      <v-avatar rounded color="red"></v-avatar>
-    </router-link>
+    <div class="profile">
+      <v-avatar class="clickable" rounded color="red" @click="$router.push('Profile')">
+      </v-avatar>
+      <v-btn icon color="white">
+        <v-icon>
+          mdi-cog
+        </v-icon>
+      </v-btn>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
   name: "NavBar",
+  components: {},
+
 }
 </script>
 
@@ -42,7 +50,9 @@ export default {
 .profile {
   position: absolute;
   right: 0;
-  padding-left: 25px;
-  padding-right: 25px;
+}
+
+.clickable {
+  cursor: pointer;
 }
 </style>
